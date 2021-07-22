@@ -1,6 +1,6 @@
 ﻿using POC.LogisticaMicrosservico.Repository.Entidades;
 
-namespace POC.LogisticaMicrosservico
+namespace POC.LogisticaMicrosservico.Repositorios
 {
     public class ArmazenamentoRepository : GenericoRepository<Armazenamento>
     {

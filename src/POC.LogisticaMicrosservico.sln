@@ -12,6 +12,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "POC.LogisticaMicrosservico.GestaoEEstrategia", "POC.LogisticaMicrosservico.GestaoEEstrategia\POC.LogisticaMicrosservico.GestaoEEstrategia.csproj", "{58DFCF6B-FD59-4CE6-8F22-E7327C0AB33E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "POC.LogisticaMicrosservico.InformacoesCadastrais", "POC.LogisticaMicrosservico.InformacoesCadastrais\POC.LogisticaMicrosservico.InformacoesCadastrais.csproj", "{794A8C42-8933-43F3-ADBC-12137E378BE1}"
+	ProjectSection(ProjectDependencies) = postProject
+		{B2FD323F-93D3-4BE2-9663-E7010DD6C3CA} = {B2FD323F-93D3-4BE2-9663-E7010DD6C3CA}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "POC.LogisticaMicrosservico.ServicosAoCliente", "POC.LogisticaMicrosservico.ServicosAoCliente\POC.LogisticaMicrosservico.ServicosAoCliente.csproj", "{253AA2A6-6BF1-468D-9DAE-85B3689E37E9}"
 EndProject

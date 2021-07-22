@@ -23,52 +23,10 @@ namespace POC.LogisticaMicrosservico
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            AdicionarDefinicoesDeEstrutura(modelBuilder);
+            modelBuilder.Entity<Usuario>()
+                .HasData(new { Id = 1L, Nome = "Usuario Exemplo", Login = "Admin", Senha = "PUCMINAS", DataCriacao = DateTime.Now, Habilitado = true, Tipo = TipoUsuario.Administrador });
 
             base.OnModelCreating(modelBuilder);
-        }
-
-        private static void AdicionarDefinicoesDeEstrutura(in ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<HistoricoLogin>()
-                .HasOne(p => p.Usuario)
-                .WithMany()
-                .IsRequired();
-
-            modelBuilder.Entity<Mercadoria>()
-                .HasOne(p => p.Cliente)
-                .WithMany()
-                .IsRequired();
-
-            modelBuilder.Entity<Mercadoria>()
-                .HasOne(p => p.Remetente)
-                .WithMany()
-                .IsRequired();
-
-            modelBuilder.Entity<Mercadoria>()
-                .HasOne(p => p.Destinatario)
-                .WithMany()
-                .IsRequired();
-
-            modelBuilder.Entity<Atendimento>()
-                .HasOne(p => p.Mercadoria)
-                .WithMany()
-                .IsRequired();
-
-            modelBuilder.Entity<HistoricoMercadoria>()
-                .HasOne(p => p.Mercadoria)
-                .WithMany()
-                .IsRequired();
-
-            modelBuilder.Entity<Endereco>()
-                .HasOne(p => p.Cidade)
-                .WithMany()
-                .IsRequired();
-
-            modelBuilder.Entity<Cidade>()
-                .HasOne(p => p.Estado)
-                .WithMany()
-                .IsRequired();
         }
     }
 }

@@ -1,21 +1,21 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using POC.LogisticaMicrosservico.Repositorios;
+using System.Text;
 
 namespace POC.LogisticaMicrosservico.InformacoesCadastrais
 {
     public class Startup
     {
+        public const string ChavePrivada = "paldf718113b48e197ggnhpghh2b708e";
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -32,6 +32,38 @@ namespace POC.LogisticaMicrosservico.InformacoesCadastrais
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "POC.LogisticaMicrosservico.InformacoesCadastrais", Version = "v1" });
             });
+
+            services.AddDbContext<LogisticaDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddScoped<ArmazenamentoRepository>();
+            services.AddScoped<AtendimentoRepository>();
+            services.AddScoped<CidadeRepository>();
+            services.AddScoped<EnderecoRepository>();
+            services.AddScoped<EstadoRepository>();
+            services.AddScoped<HistoricoLoginRepository>();
+            services.AddScoped<HistoricoMercadoriaRepository>();
+            services.AddScoped<MercadoriaRepository>();
+            services.AddScoped<UsuarioRepository>();
+
+            // Autenticacao JWT
+            services.AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(x =>
+            {
+                x.RequireHttpsMetadata = false;
+                x.SaveToken = true;
+                x.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(ChavePrivada)),
+                    ValidateIssuer = false,
+                    ValidateAudience = false
+                };
+            });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -48,6 +80,7 @@ namespace POC.LogisticaMicrosservico.InformacoesCadastrais
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
