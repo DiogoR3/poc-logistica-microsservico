@@ -2,7 +2,7 @@
 using POC.LogisticaMicrosservico.Repository.Entidades;
 using System;
 
-namespace Vocalcom.Service.Database.Repository
+namespace POC.LogisticaMicrosservico
 {
     public class LogisticaDbContext : DbContext
     {
