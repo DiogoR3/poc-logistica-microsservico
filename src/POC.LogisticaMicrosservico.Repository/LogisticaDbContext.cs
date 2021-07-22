@@ -24,7 +24,13 @@ namespace POC.LogisticaMicrosservico
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Usuario>()
-                .HasData(new { Id = 1L, Nome = "Usuario Exemplo", Login = "Admin", Senha = "PUCMINAS", DataCriacao = DateTime.Now, Habilitado = true, Tipo = TipoUsuario.Administrador });
+                .HasData(new { Id = 1L, Nome = "Usuario Administrador", Login = "Admin", Senha = "PUCMINAS", DataCriacao = DateTime.Now, Habilitado = true, Tipo = TipoUsuario.Administrador });
+
+            modelBuilder.Entity<Usuario>()
+                .HasData(new { Id = 2L, Nome = "Usuario Cliente", Login = "Cliente", Senha = "PUCMINAS", DataCriacao = DateTime.Now, Habilitado = true, Tipo = TipoUsuario.Cliente });
+
+            modelBuilder.Entity<Usuario>()
+                .HasData(new { Id = 3L, Nome = "Usuario Colaborador", Login = "Colaborador", Senha = "PUCMINAS", DataCriacao = DateTime.Now, Habilitado = true, Tipo = TipoUsuario.Colaborador });
 
             base.OnModelCreating(modelBuilder);
         }

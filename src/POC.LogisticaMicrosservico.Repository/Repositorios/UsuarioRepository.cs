@@ -1,5 +1,5 @@
 ﻿using POC.LogisticaMicrosservico.Repository.Entidades;
-using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace POC.LogisticaMicrosservico.Repositorios
@@ -14,6 +14,11 @@ namespace POC.LogisticaMicrosservico.Repositorios
                 return null;
 
             return Find(us => us.Login == login && us.Senha == senha).FirstOrDefault();
+        }
+
+        public IEnumerable<Usuario> ObterTodos()
+        {
+            return GetAll();
         }
     }
 }

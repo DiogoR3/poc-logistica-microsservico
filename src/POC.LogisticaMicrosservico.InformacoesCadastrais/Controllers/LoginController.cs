@@ -26,8 +26,6 @@ namespace POC.LogisticaMicrosservico.InformacoesCadastrais.Controllers
 
             string token = TokenService.GenerateToken(usuarioAutenticado, Startup.ChavePrivada);
 
-            usuarioAutenticado.Senha = string.Empty;
-
             return new
             {
                 usuarioAutenticado.Login,

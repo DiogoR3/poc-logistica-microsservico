@@ -1,4 +1,5 @@
-﻿using Microsoft.IdentityModel.Tokens;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 using POC.LogisticaMicrosservico.Repository.Entidades;
 using System;
 using System.IdentityModel.Tokens.Jwt;
@@ -7,6 +8,7 @@ using System.Text;
 
 namespace POC.LogisticaMicrosservico.InformacoesCadastrais.Services
 {
+    [Route("[controller]")]
     public class TokenService
     {
         public static string GenerateToken(Usuario usuario, string secret)
