@@ -29,11 +29,11 @@ namespace POC.LogisticaMicrosservico.InformacoesCadastrais
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddSwaggerGen(c =>
+            services.AddSwaggerGen(setup =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "POC.LogisticaMicrosservico.InformacoesCadastrais", Version = "v1" });
+                setup.SwaggerDoc("v1", new OpenApiInfo { Title = "POC.LogisticaMicrosservico.InformacoesCadastrais", Version = "v1" });
 
-                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                setup.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {
                     Type = SecuritySchemeType.Http,
                     BearerFormat = "JWT",
@@ -42,7 +42,7 @@ namespace POC.LogisticaMicrosservico.InformacoesCadastrais
                     Description = "Por favor insira o token JWT"
                 });
 
-                c.AddSecurityRequirement(new OpenApiSecurityRequirement
+                setup.AddSecurityRequirement(new OpenApiSecurityRequirement
                 {
                     {
                         new OpenApiSecurityScheme
