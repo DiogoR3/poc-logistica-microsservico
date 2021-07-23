@@ -18,7 +18,6 @@ namespace POC.LogisticaMicrosservico.InformacoesCadastrais.Controllers
         }
 
         [HttpGet]
-        [Route("ListarUsuarios")]
         [Authorize(Roles = "Administrador")]
         public IEnumerable<Usuario> ListarUsuarios()
         {

@@ -10,6 +10,7 @@ namespace POC.LogisticaMicrosservico.InformacoesCadastrais.Controllers
     public class LoginController : ControllerBase
     {
         public UsuarioRepository UsuarioRepository { get; set; }
+        public class ViewModelUsuario { public string Login { get; set; } public string Senha { get; set; } }
 
         public LoginController(UsuarioRepository usuarioRepository)
         {
@@ -17,9 +18,9 @@ namespace POC.LogisticaMicrosservico.InformacoesCadastrais.Controllers
         }
 
         [HttpPost]
-        public object Login(string login, string senha)
+        public object Login(ViewModelUsuario usuario)
         {
-            Usuario usuarioAutenticado = UsuarioRepository.Login(login, senha);
+            Usuario usuarioAutenticado = UsuarioRepository.Login(usuario.Login, usuario.Senha);
 
             if (usuarioAutenticado is null)
                 return BadRequest(new { message = "Credenciais inválidas!" });
