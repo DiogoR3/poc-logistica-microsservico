@@ -1,9 +1,6 @@
 <template>
   <v-app>
-    <v-container>
-      <router-link to="/Login">Ir para Login</router-link>
-      <br>
-      <router-link to="/">Ir para Menu</router-link>
+    <v-container fill-height fluid>
       <router-view></router-view>
     </v-container>
   </v-app>

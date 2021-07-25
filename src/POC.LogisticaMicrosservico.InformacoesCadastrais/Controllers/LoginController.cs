@@ -30,6 +30,7 @@ namespace POC.LogisticaMicrosservico.InformacoesCadastrais.Controllers
             return new
             {
                 usuarioAutenticado.Login,
+                tipo = usuarioAutenticado.Tipo.ToString(),
                 token
             };
         }

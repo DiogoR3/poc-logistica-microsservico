@@ -8,11 +8,11 @@ function ListarUsuarios() : Promise<AxiosResponse>{
     return axios.get('/api/Usuario')
 }
 
-function Atendimento(id: number) : Promise<AxiosResponse>{
+function Atendimento(id: string) : Promise<AxiosResponse>{
     return axios.get('/api/Atendimento/' + id)
 }
 
-function Mercadoria(id: number) : Promise<AxiosResponse>{
+function Mercadoria(id: string) : Promise<AxiosResponse>{
     return axios.get('/api/Mercadoria/' + id)
 }
 
