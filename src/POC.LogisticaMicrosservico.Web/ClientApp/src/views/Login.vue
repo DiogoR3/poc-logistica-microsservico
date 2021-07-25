@@ -1,6 +1,6 @@
 <template>
   <v-row align="center" justify="center">
-    <v-col cols="12" xs="11" sm="10" md="8" lg="7" xl="6">
+    <v-col cols="12" xs="11" sm="8" md="6" lg="4">
       <CaixaLogin />
     </v-col>
   </v-row>

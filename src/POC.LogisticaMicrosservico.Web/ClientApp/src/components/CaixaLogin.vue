@@ -81,8 +81,7 @@ export default Vue.extend({
 
       try {
         let resultado = await api.Login(this.login, this.senha);
-        console.log(resultado.status);
-        this.$router.push("/");
+        this.$router.push("/Menu");
       } catch (ex) {
         this.mensagemSnackbar =
           ex?.response?.status == 400

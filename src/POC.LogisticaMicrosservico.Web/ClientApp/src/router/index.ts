@@ -25,17 +25,20 @@ const routes: Array<RouteConfig> = [
     children: [
       {
         path: 'Atendimento',
+        name: 'Atendimento',
         component: Atendimento
-      },{
+      }, {
         path: 'Mercadoria',
+        name: 'Mercadoria',
         component: Mercadoria
       },
       {
         path: 'Usuarios',
+        name: 'Usuarios',
         component: Usuarios
       },
     ]
-  }
+  },
 ]
 
 const router = new VueRouter({
@@ -43,7 +46,10 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  console.log('teste')
+  if (to.name == 'Menu') {
+    next('/Menu/Usuarios')
+  }
+
   next()
 })
 
