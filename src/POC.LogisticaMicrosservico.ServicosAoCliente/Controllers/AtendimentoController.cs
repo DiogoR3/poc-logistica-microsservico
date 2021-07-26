@@ -19,7 +19,7 @@ namespace POC.LogisticaMicrosservico.ServicosAoCliente.Controllers
 
         [HttpGet]
         [Route("{chamado}")]
-        [Authorize(Roles = "Administrador,Cliente")]
+        [Authorize(Roles = "Administrador,Cliente,Fornecedor")]
         public IEnumerable<Atendimento> ObterAtendimento(string chamado)
         {
             return AtendimentoRepository.ObterAtendimento(chamado);

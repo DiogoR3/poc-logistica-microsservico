@@ -36,7 +36,7 @@ namespace POC.LogisticaMicrosservico.Web.Services
             {
                 return (((HttpWebResponse)ex.Response)?.StatusCode ?? HttpStatusCode.InternalServerError, null);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return (HttpStatusCode.InternalServerError, null);
             }
