@@ -1,7 +1,7 @@
 <template>
   <v-card elevation="4">
     <v-list dense>
-      <v-subheader>Usuário:</v-subheader>
+      <v-subheader class="negrito">Usuário: {{ tipoUsuario }}</v-subheader>
       <v-list-item-group v-model="selectedItem" color="primary" mandatory>
         <v-list-item @click="irPara('/Menu/Usuarios')">
           <v-list-item-icon>
@@ -59,6 +59,7 @@
 
 <script lang="ts">
 import Vue from "vue";
+import { tipoUsuario, logout } from '../../api/autenticacao'
 
 export default Vue.extend({
   name: "Opcoes",
@@ -66,8 +67,11 @@ export default Vue.extend({
   data: () => ({
     selectedItem: 0 as number,
     dialogo: false as boolean,
+    tipoUsuario: 'Desconhecido' as string
   }),
-  mounted() {},
+  mounted() {
+    this.tipoUsuario = tipoUsuario();
+  },
   methods: {
     irPara(caminho: string): void {
       if (this.$route.path.indexOf(caminho) == -1) {
@@ -75,9 +79,15 @@ export default Vue.extend({
       }
     },
     sair(): void {
-      console.log("sair");
+      logout();
     },
   },
 });
 </script>
 
+<style scoped>
+  .negrito{
+    font-size: 1.05rem;
+    font-weight: bold;
+  }
+</style>

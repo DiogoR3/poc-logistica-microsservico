@@ -23,17 +23,16 @@
       <v-form v-model="valido" @submit.prevent="logar">
         <v-text-field
           v-model="login"
-          :counter="10"
+          :counter="20"
           label="Login"
           :rules="regras"
           required
-          max-length="10"
           autocomplete="on"
         ></v-text-field>
 
         <v-text-field
           v-model="senha"
-          :counter="10"
+          :counter="20"
           label="Senha"
           :rules="regras"
           required
@@ -72,16 +71,19 @@ export default Vue.extend({
     valido: true as boolean,
     regras: [
       (v: string) => !!v || "Campo obrigatório",
-      (v: string) => v.length <= 10 || "Campo deve ter menos de 10 caracteres",
+      (v: string) => v.length <= 20 || "Campo deve ter menos de 20 caracteres",
     ],
   }),
   methods: {
-    async logar() {
+    async logar(): Promise<void> {
       this.carregando = true;
 
       try {
         let resultado = await api.Login(this.login, this.senha);
-        this.$router.push("/Menu");
+
+        sessionStorage.setItem('login', JSON.stringify(resultado.data))
+
+        this.$router.push("/Menu/Usuarios");
       } catch (ex) {
         this.mensagemSnackbar =
           ex?.response?.status == 400

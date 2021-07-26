@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Primitives;
+using POC.LogisticaMicrosservico.Repository.Entidades;
 using POC.LogisticaMicrosservico.Web.Services;
 using System.Collections.Generic;
 using System.Text.Json;
@@ -13,7 +14,7 @@ namespace POC.LogisticaMicrosservico.Web.Controllers
     {
         public InformacoesCadastraisService InformacoesCadastraisService { get; set; }
         public ServicosAoClienteService ServicosAoClienteService { get; set; }
-        public class Usuario { public string Login { get; set; } public string Senha { get; set; } }
+        public class UsuarioLogin { public string Login { get; set; } public string Senha { get; set; } }
 
         public DefaultController(InformacoesCadastraisService informacoesCadastraisService, ServicosAoClienteService servicosAoClienteService)
         {
@@ -23,7 +24,7 @@ namespace POC.LogisticaMicrosservico.Web.Controllers
 
         [HttpPost]
         [Route("Login")]
-        public async Task<JsonResult> Login(Usuario usuario)
+        public async Task<JsonResult> Login(UsuarioLogin usuario)
         {
             var resposta = await InformacoesCadastraisService.Login(usuario.Login, usuario.Senha);
             Response.StatusCode = (int)resposta.Item1;
@@ -35,6 +36,15 @@ namespace POC.LogisticaMicrosservico.Web.Controllers
         public async Task<JsonResult> ListarUsuarios()
         {
             var resposta = await InformacoesCadastraisService.TokenAutorizacao(CabecalhoAutorizacao()).ListarUsuarios();
+            Response.StatusCode = (int)resposta.Item1;
+            return Deserialize(resposta.Item2);
+        }
+
+        [HttpPost]
+        [Route("CriarUsuario")]
+        public async Task<JsonResult> CriarUsuario(Usuario usuario)
+        {
+            var resposta = await InformacoesCadastraisService.TokenAutorizacao(CabecalhoAutorizacao()).CriarUsuario(usuario);
             Response.StatusCode = (int)resposta.Item1;
             return Deserialize(resposta.Item2);
         }

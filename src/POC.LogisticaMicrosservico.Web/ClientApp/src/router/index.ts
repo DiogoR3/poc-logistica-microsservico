@@ -2,6 +2,8 @@ import Vue from 'vue'
 import VueRouter, { RouteConfig } from 'vue-router'
 import Login from '../views/Login.vue'
 
+import { jaFezLogin } from '../api/autenticacao'
+
 //Menu
 import Usuarios from '../components/Menu/Usuarios.vue'
 import Atendimento from '../components/Menu/Atendimento.vue'
@@ -46,8 +48,17 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
+
+  if (to.name == 'Login' && jaFezLogin()) {
+    next('/Menu/Usuarios')
+  }
+
   if (to.name == 'Menu') {
     next('/Menu/Usuarios')
+  }
+
+  if ((to.name == 'Atendimento' || to.name == 'Mercadoria' || to.name == 'Usuarios') && !jaFezLogin()) {
+    next('/')
   }
 
   next()

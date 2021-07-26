@@ -15,9 +15,6 @@ import Opcoes from "../components/Menu/Opcoes.vue";
 
 export default Vue.extend({
   name: "Menu",
-  mounted() {
-
-  },
   components: {
     Opcoes,
   },

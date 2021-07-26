@@ -26,6 +26,11 @@ namespace POC.LogisticaMicrosservico.Web.Services
         public async Task<(HttpStatusCode, string)> ListarUsuarios()
         {
             return await HttpService.HttpRequestAsync($"{Hostname}/Usuario", HttpMethod.Get, Autorizacao);
-        }                                     
+        }
+
+        public async Task<(HttpStatusCode, string)> CriarUsuario(Usuario usuario)
+        {
+            return await HttpService.HttpRequestAsync($"{Hostname}/Usuario", HttpMethod.Post, Autorizacao, usuario);
+        }
     }
 }
