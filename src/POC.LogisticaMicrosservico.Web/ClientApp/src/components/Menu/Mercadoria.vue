@@ -1,3 +1,9 @@
 <template>
-    <h1>Mercadoria</h1>
+    <v-timeline>
+    <v-timeline-item>timeline item</v-timeline-item>
+    <v-timeline-item class="text-right">
+      timeline item
+    </v-timeline-item>
+    <v-timeline-item>timeline item</v-timeline-item>
+  </v-timeline>
 </template>

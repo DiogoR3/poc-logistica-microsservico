@@ -1,5 +1,7 @@
-﻿using POC.LogisticaMicrosservico.Repository.Entidades;
+﻿using Microsoft.EntityFrameworkCore;
+using POC.LogisticaMicrosservico.Repository.Entidades;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace POC.LogisticaMicrosservico.Repositorios
 {
@@ -9,7 +11,10 @@ namespace POC.LogisticaMicrosservico.Repositorios
 
         public IEnumerable<Atendimento> ObterAtendimento(string chamado)
         {
-            return Find(x => x.Chamado == chamado);
+            return from atendimentos in Context.Atendimento.Include(m => m.Mercadoria)
+                   where atendimentos.Chamado == chamado
+                   orderby atendimentos.Id
+                   select atendimentos;
         }
     }
 }

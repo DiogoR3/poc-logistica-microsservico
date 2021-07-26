@@ -71,6 +71,12 @@ export default Vue.extend({
   }),
   mounted() {
     this.tipoUsuario = tipoUsuario();
+
+    switch(this.$route.name){
+      case "Atendimento": this.selectedItem = 1; break;
+      case "Mercadoria": this.selectedItem = 2; break;
+      default: this.selectedItem = 0; break;
+    }
   },
   methods: {
     irPara(caminho: string): void {
