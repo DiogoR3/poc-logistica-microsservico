@@ -1,0 +1,56 @@
+version: '3'
+
+services:
+  gsl-ciencia-de-dados:
+    image: ciencia-de-dados
+    build: ./POC.LogisticaMicrosservico.CienciaDeDados/
+    
+  gsl-gestao-e-estrategia:
+    image: gestao-e-estrategia
+    build: ./POC.LogisticaMicrosservico.GestaoEEstrategia/
+    
+  gsl-informacoes-cadastrais:
+    image: informacoes-cadastrais
+    build: ./POC.LogisticaMicrosservico.InformacoesCadastrais/
+    ports:
+      - "8080:80"
+      - "443"
+    networks:
+      - my-network
+      
+  gsl-servicos-ao-cliente:
+    image: servicos-ao-cliente
+    build: ./POC.LogisticaMicrosservico.ServicosAoCliente/
+    ports:
+      - "8085:80"
+      - "443"
+    networks:
+      - my-network
+   
+  gsl-web:
+    image: web-vue
+    environment:
+      - HOSTNAME_INFORMACOESCADASTRAIS=http://gsl-informacoes-cadastrais
+      - HOSTNAME_SERVICOSAOCLIENTE=http://gsl-servicos-ao-cliente
+    build: ./POC.LogisticaMicrosservico.Web/
+    ports:
+      - "80:80"
+      - "443:443"
+    networks:
+      - my-network
+  
+  sql-server:
+    image: mcr.microsoft.com/mssql/server:latest
+    environment: 
+      ACCEPT_EULA: Y
+      SA_PASSWORD: SecurePassword#123
+      MSSQL_PID: Express
+    ports:
+      - "7654:1433"
+    networks:
+      - my-network
+      
+networks:
+  my-network:
+    driver: bridge
+    

@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using POC.LogisticaMicrosservico.Web.Services;
+using System.IO;
 
 namespace POC.LogisticaMicrosservico.Web
 {
@@ -23,7 +24,11 @@ namespace POC.LogisticaMicrosservico.Web
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
+#if DEBUG
                 configuration.RootPath = "ClientApp";
+#else
+                configuration.RootPath = Path.Combine("ClientApp", "dist");
+#endif
             });
 
             services.AddScoped<InformacoesCadastraisService>();

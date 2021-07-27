@@ -16,7 +16,7 @@
         <v-list subheader three-line>
           <v-subheader>Título: {{ atendimento.titulo }}</v-subheader>
 
-          <v-list-item v-for="(mensagem, indice) in atendimento.mensagens">
+          <v-list-item v-for="(mensagem, indice) in atendimento.mensagens" :key="indice">
             <v-list-item-content>
               <v-list-item-title>{{
                 atendimento.partes[indice]
@@ -71,7 +71,7 @@ export default Vue.extend({
         const atendimento = (await api.Atendimento(this.busca)).data;
 
         if (!atendimento.length) {
-          this.atendimento.titulo = '';
+          this.atendimento.titulo = "";
           this.atendimento.partes = [];
           this.atendimento.mensagens = [];
           this.mostrarSnackbar("Não foi possível encontrar o atendimento!");
